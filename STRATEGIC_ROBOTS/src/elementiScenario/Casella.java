@@ -38,17 +38,17 @@ public class Casella extends JComponent {
 		Rectangle rett = new Rectangle(5, 5, 1000, 1000);
 		g.setColor(Color.BLACK);
 
-		if (tipoScenario.equals("classic")) g.draw(rett);
+		if (getTipoScenario().equals("classic")) g.draw(rett);
 
 				
-		if(riempiCasella) {
-			g.setColor(colCas);
+		if(isRiempiCasella()) {
+			g.setColor(getColCas());
 			g.fill(rett);
 		}
 		
-		if (drawOggetto) oggetto.disegna(g);
+		if (isDrawOggetto()) oggetto.disegna(g);
 
-		if (drawEnergia){
+		if (isDrawEnergia()){
 			BarraEnergia barra = new BarraEnergia(oggettoEnergetico.getEnergia());
 			barra.disegna(g);			
 		}
@@ -86,6 +86,26 @@ public class Casella extends JComponent {
 		drawEnergia = false;
 		riempiCasella = false;
 		repaint();
+	}
+
+	public String getTipoScenario() {
+		return tipoScenario;
+	}
+
+	public boolean isDrawOggetto() {
+		return drawOggetto;
+	}
+
+	public boolean isDrawEnergia() {
+		return drawEnergia;
+	}
+
+	public boolean isRiempiCasella() {
+		return riempiCasella;
+	}
+
+	public Color getColCas() {
+		return colCas;
 	}
 
 }
