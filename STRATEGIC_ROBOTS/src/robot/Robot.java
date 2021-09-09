@@ -211,6 +211,7 @@ public class Robot implements Disegnabile, Energetico, Cloneable{
 		colore = c;
 	}
 
+	/*
 	public String toString(){
 		return getClass().getName() + "[x=" + x +", y=" +y +", energiaRobot=" + energiaRobot+ ", energSpost="+energSpost +", MAX_ENERGIA=" + MAX_ENERGIA+ ", colore=" +colore+"]";
 	}
@@ -235,5 +236,6 @@ public class Robot implements Disegnabile, Energetico, Cloneable{
 			return null;
 		}
 	}
+	*/
 	
 }

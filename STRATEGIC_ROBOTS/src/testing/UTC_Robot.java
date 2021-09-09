@@ -122,21 +122,21 @@ public class UTC_Robot {
 	}
 
 	@Test
-	public void testModificaX() {
+	public void testRobotModificaX() {
 		robot.modificaX(10);
 		assertEquals(10, robot.getX());
 		assertNotEquals(11, robot.getX());
 	}
 
 	@Test
-	public void testModificaY() {
+	public void testRobotModificaY() {
 		robot.modificaY(10);
 		assertEquals(10, robot.getY());
 		assertNotEquals(11, robot.getY());
 	}
 
 	@Test
-	public void testModificaEnergiaSpostamento() {
+	public void testRobotModificaEnergiaSpostamento() {
 		robot.modificaEnergiaSpostamento(10);
 		assertEquals(10, robot.getEnergiaSpostamento());
 		assertNotEquals(1, robot.getEnergiaSpostamento());

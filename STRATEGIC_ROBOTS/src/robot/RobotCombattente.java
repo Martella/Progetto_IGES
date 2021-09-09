@@ -109,7 +109,7 @@ public class RobotCombattente extends Robot {
 	}
 	
 	
-
+/*
 	public String toString(){
 		return super.toString() +"[energiaAttacco="+ energiaAttacco +", dannoAttacco=" + dannoAttacco + "]";
 	}
@@ -129,5 +129,5 @@ public class RobotCombattente extends Robot {
 
 		return cloned;
 	}
-
+*/
 }

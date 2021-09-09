@@ -146,6 +146,7 @@ public class RobotLavoratore extends Robot {
 
 	}
 	
+	/*
 	public String toString(){
 		return super.toString()+"[energiaCura="+ energiaCura+", capacit‡Cura=" +capacit‡Cura +"]";
 	}
@@ -167,6 +168,6 @@ public class RobotLavoratore extends Robot {
 		return cloned;
 	}
 
-
+*/
 	
 }
