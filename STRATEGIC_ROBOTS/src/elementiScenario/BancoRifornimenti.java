@@ -21,13 +21,13 @@ public class BancoRifornimenti implements Disegnabile{
 		riservaEnergia = 250;
 	}
 
-	public BancoRifornimenti(Color c){
+	/*public BancoRifornimenti(Color c){
 		x = 0;
 		y = 0;
 		colore = c;
 		riservaEnergia = 250;
 	}
-	
+	*/
 
 	public void modificaX(int xx){
 		x = xx;
