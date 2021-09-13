@@ -19,28 +19,28 @@ public class UTC_RobotLavoratore {
 	}
 	
 	@Test
-	public void testRobotGetTipo() {
+	public void testGetTipo() {
 		//valore default robotLavoratore
 		assertEquals("robotLavoratore", robotL.getTipo());
 		assertNotEquals("robot", robotL.getTipo());
 	}
 	
 	@Test
-	public void testRobotGetEnergiaCura() {
+	public void testGetEnergiaCura() {
 		// valore default 5
 		assertEquals(5, robotL.getEnergiaCura());
 		assertNotEquals(0, robotL.getEnergiaCura());
 	}
 	
 	@Test
-	public void testRobotGetCapacit‡Cura() {
+	public void testGetCapacit‡Cura() {
 		// valore default 20
 		assertEquals(20, robotL.getCapacit‡Cura());
 		assertNotEquals(0, robotL.getCapacit‡Cura());
 	}
 	
 	@Test
-	public void testRobotSpostaOgetto() {
+	public void testSpostaOgetto() {
 		// robot puÚ spostare un ogetto solo se ha energia per sposare un ogetto
 		robotL.modificaEnergia(50);
 		try {
@@ -59,21 +59,21 @@ public class UTC_RobotLavoratore {
 	}
 	
 	@Test
-	public void testRobotModificaEnergiaCura() {
+	public void testModificaEnergiaCura() {
 		robotL.modificaEnergiaCura(15);
 		assertEquals(15, robotL.getEnergiaCura());
 		assertNotEquals(5, robotL.getEnergiaCura());		
 	}
 	
 	@Test
-	public void testRobotModificaCapacit‡Cura() {
+	public void testModificaCapacit‡Cura() {
 		robotL.modificaCapacit‡cura(50);
 		assertEquals(50, robotL.getCapacit‡Cura());
 		assertNotEquals(20, robotL.getCapacit‡Cura());		
 	}
 
 	@Test
-	public void testRobotCuraRobot() {
+	public void testCuraRobot() {
 		
 		/*Viene sottratta all'energia del RobotLavoratore l'energia che serve per curare un Robot, se il RobotLavoratore ha energia a sufficienza.
 		Viene aggiunta all'energia del Robot da curare la capacit‡ di cura del RobotLavoratore se ha energia a sufficienza per curare.

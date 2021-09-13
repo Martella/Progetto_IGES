@@ -17,35 +17,35 @@ public class UTC_Ostacolo {
 	}
 	
 	@Test
-	public void testOstacoloGetTipo() {
+	public void testGetTipo() {
 		//valore default ostacolo
 		assertEquals("ostacolo", ostacolo.getTipo());
 		assertNotEquals("robot", ostacolo.getTipo());
 	}
 	
 	@Test
-	public void testOstacoloGetX() {
+	public void testGetX() {
 		// valore default 0
 		assertEquals(0, ostacolo.getX());
 		assertNotEquals(1, ostacolo.getX());
 	}
 	
 	@Test
-	public void testOstacoloGetY() {
+	public void testGetY() {
 		// valore default 0
 		assertEquals(0, ostacolo.getY());
 		assertNotEquals(1, ostacolo.getY());
 	}
 	
 	@Test
-	public void testOstacoloGetEnergia() {
+	public void testGetEnergia() {
 		// valore default 100
 		assertEquals(100, ostacolo.getEnergia());
 		assertNotEquals(1, ostacolo.getEnergia());
 	}
 	
 	@Test
-	public void testOstacoloModificaX() {
+	public void testModificaX() {
 		ostacolo.modificaX(10);
 		assertEquals(10, ostacolo.getX());
 		assertNotEquals(11, ostacolo.getX());
@@ -59,7 +59,7 @@ public class UTC_Ostacolo {
 	}
 	
 	@Test
-	public void testOstacoloSpostamentoX() {
+	public void testSpostamentoX() {
 		ostacolo.spostamentoX(20);
 		assertEquals(20, ostacolo.getX());
 		assertNotEquals(10, ostacolo.getX());

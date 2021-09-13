@@ -21,49 +21,49 @@ public class UTC_Robot {
 	
 
 	@Test
-	public void testRobotGetTipo() {
+	public void testGetTipo() {
 		//valore default robot
 		assertEquals("robot", robot.getTipo());
 		assertNotEquals("prova", robot.getTipo());
 	}
 	
 	@Test
-	public void testRobotGetX() {
+	public void testGetX() {
 		// valore default 0
 		assertEquals(0, robot.getX());
 		assertNotEquals(1, robot.getX());
 	}
 	
 	@Test
-	public void testRobotGetY() {
+	public void testGetY() {
 		// valore default 0
 		assertEquals(0, robot.getY());
 		assertNotEquals(1, robot.getY());
 	}
 	
 	@Test
-	public void testRobotGetEnergia() {
+	public void testGetEnergia() {
 		// valore default 100
 		assertEquals(100, robot.getEnergia());
 		assertNotEquals(1, robot.getEnergia());
 	}
 	
 	@Test
-	public void testRobotGetEnergiaSpostamento() {
+	public void testGetEnergiaSpostamento() {
 		// valore default 1
 		assertEquals(1, robot.getEnergiaSpostamento());
 		assertNotEquals(0, robot.getEnergiaSpostamento());
 	}
 	
 	@Test
-	public void testRobotGetMaxEnergia() {
+	public void testtGetMaxEnergia() {
 		// valore default 100
 		assertEquals(100, robot.getMaxEnergia());
 		assertNotEquals(1, robot.getMaxEnergia());
 	}
 	
 	@Test
-	public void testRobotGetColore() {
+	public void testGetColore() {
 		//valore default Color.LIGHT_GRAY
 		assertEquals(Color.LIGHT_GRAY, robot.getColore());
 		assertNotEquals(Color.BLACK, robot.getColore());
@@ -71,7 +71,7 @@ public class UTC_Robot {
 	
 	
 	@Test
-	public void testRobotModificaEnergia() {
+	public void testModificaEnergia() {
 		//range ammissibile 0-100
 		robot.modificaEnergia(50);
 		assertEquals(50, robot.getEnergia());
@@ -83,7 +83,7 @@ public class UTC_Robot {
 	
 
 	@Test
-	public void TestRobotSpostamentoX() {
+	public void TestSpostamentoX() {
 		// robot si sposta solo se ha energia altrimenti lancia eccezione
 		
 		robot.modificaEnergia(50);
@@ -102,7 +102,7 @@ public class UTC_Robot {
 		
 	}
 	
-	public void TestRobotspostamentoY() {
+	public void TestspostamentoY() {
 		// robot si sposta solo se ha energia per lo spostamento altrimenti lancia eccezione
 		
 		robot.modificaEnergia(50);
@@ -122,28 +122,28 @@ public class UTC_Robot {
 	}
 
 	@Test
-	public void testRobotModificaX() {
+	public void testModificaX() {
 		robot.modificaX(10);
 		assertEquals(10, robot.getX());
 		assertNotEquals(11, robot.getX());
 	}
 
 	@Test
-	public void testRobotModificaY() {
+	public void testModificaY() {
 		robot.modificaY(10);
 		assertEquals(10, robot.getY());
 		assertNotEquals(11, robot.getY());
 	}
 
 	@Test
-	public void testRobotModificaEnergiaSpostamento() {
+	public void testModificaEnergiaSpostamento() {
 		robot.modificaEnergiaSpostamento(10);
 		assertEquals(10, robot.getEnergiaSpostamento());
 		assertNotEquals(1, robot.getEnergiaSpostamento());
 	}
 	
 	@Test
-	public void testRobotModificaColore() {
+	public void testModificaColore() {
 		robot.modificaColore(Color.BLACK);
 		assertEquals(Color.BLACK, robot.getColore());
 		assertNotEquals(Color.LIGHT_GRAY, robot.getColore());

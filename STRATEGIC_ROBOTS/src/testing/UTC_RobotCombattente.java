@@ -17,28 +17,28 @@ public class UTC_RobotCombattente {
 	}
 	
 	@Test
-	public void testRobotGetTipo() {
+	public void testGetTipo() {
 		//valore default robotCombattente
 		assertEquals("robotCombattente", robotC.getTipo());
 		assertNotEquals("robot", robotC.getTipo());
 	}
 	
 	@Test
-	public void testRobotGetDannoAttacco() {
+	public void testGetDannoAttacco() {
 		// valore default 40
 		assertEquals(40, robotC.getDannoAttacco());
 		assertNotEquals(0, robotC.getDannoAttacco());
 	}
 	
 	@Test
-	public void testRobotGetEnergiaAttacco() {
+	public void testGetEnergiaAttacco() {
 		// valore default 5
 		assertEquals(5, robotC.getEnergiaAttacco());
 		assertNotEquals(0, robotC.getEnergiaAttacco());
 	}
 	
 	@Test
-	public void TestRobotAttacca() {
+	public void TestAttacca() {
 		// robot può attaccare solo se ha energia per l'attacco altrimenti lancia eccezione
 
 		robotC.modificaEnergia(50);
