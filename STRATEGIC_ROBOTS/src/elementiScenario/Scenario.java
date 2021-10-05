@@ -75,7 +75,7 @@ public class Scenario extends JPanel{
 	 * Disegna un oggetto Disegnabile in una casella vuota dello scenario scelta casualmente.
 	 * @param o oggetto da disegnare
 	 */
-	public void aggiungiOggettoRandom(Disegnabile o){
+	private void aggiungiOggettoRandom(Disegnabile o){
 
 		Disegnabile oggetto = o;
 		
