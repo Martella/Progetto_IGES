@@ -12,7 +12,7 @@ import robot.Robot;
 import robot.RobotCombattente;
 import robot.RobotLavoratore;
 
-abstract class Controllore{
+public class Controllore{
 	
 	private ArrayList<RobotCombattente> robotCombattenteArray;
 	private ArrayList<RobotLavoratore> robotLavoratoreArray;
