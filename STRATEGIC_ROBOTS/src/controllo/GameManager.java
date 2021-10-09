@@ -1,4 +1,4 @@
-package generale;
+package controllo;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,9 +19,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import controllo.ControlloreInterattivo;
-import controllo.ControlloreNonInterattivo;
-import controllo.TimerMossaComputer;
 import elementiScenario.Scenario;
 import frame.FineRoundFrame;
 import frame.ImpostazioniNuovaPartitaFrame;

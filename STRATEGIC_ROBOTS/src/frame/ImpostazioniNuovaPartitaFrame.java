@@ -12,7 +12,7 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import generale.GameManager;
+import controllo.GameManager;
 
 /**
  * Questa classe è un frame che da la possibilità all'utente di settare le impostazioni di una nuova partita.
@@ -71,10 +71,14 @@ public class ImpostazioniNuovaPartitaFrame extends JFrame{
 		controComputer = new JRadioButton("Giocatore1 vs Computer");
 		ButtonGroup gruppo = new ButtonGroup();
 		gruppo.add(controGiocatore);
-		gruppo.add(controComputer);
+		
+		//PER MODALITà CONTRO COMPUTER, DISABILITATA PER IL PROGETTO DI IGES
+		//gruppo.add(controComputer);
+		// panel.add(controComputer);
+		
 		controGiocatore.setSelected(true);
 		panel.add(controGiocatore);
-		panel.add(controComputer);
+		
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Modalità"));
 		return panel;
 		
