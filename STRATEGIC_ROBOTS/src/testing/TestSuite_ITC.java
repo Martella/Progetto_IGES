@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({				
   ITC_Scenario.class,
   ITC_Casella.class,
-  ITC_Controllore.class,
+  ITC_ControlloreInterattivo.class,
   })
 
 public class TestSuite_ITC {

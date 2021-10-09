@@ -11,20 +11,20 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import controllo.Controllore;
+import controllo.ControlloreInterattivo;
 import elementiScenario.Scenario;
 import robot.RobotCombattente;
 import robot.RobotLavoratore;
 
-public class ITC_Controllore {
+public class ITC_ControlloreInterattivo {
 	
-	private Controllore controllore;
+	private ControlloreInterattivo controllore;
 	
 	@Before
 	public void beforeTest() {
 		Scenario scenario = new Scenario("classic");
 		JFrame frame = new JFrame();
-		controllore = new Controllore(scenario, frame);
+		controllore = new ControlloreInterattivo(scenario, frame);
 	}
 	
 	@Test
@@ -76,7 +76,7 @@ public class ITC_Controllore {
 		
 		Scenario scenario = new Scenario("classic");
 		JFrame frame = new JFrame();
-		Controllore controllore2 = new Controllore(scenario, frame);
+		ControlloreInterattivo controllore2 = new ControlloreInterattivo(scenario, frame);
 		for(int i = 0; i < 2; i++) controllore2.aggiungiRobot(new RobotCombattente(Color.ORANGE));
 		for(int i = 0; i < 2; i++) controllore2.aggiungiRobot(new RobotLavoratore(Color.ORANGE));
 		
