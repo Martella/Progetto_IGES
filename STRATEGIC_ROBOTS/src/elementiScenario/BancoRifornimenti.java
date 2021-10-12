@@ -3,10 +3,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
+import java.io.Serializable;
 
 import interfacce.Disegnabile;
 
-public class BancoRifornimenti implements Disegnabile{
+public class BancoRifornimenti implements Disegnabile, Serializable{
 	
 	private Color colore;
 	private int x;

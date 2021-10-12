@@ -8,7 +8,7 @@ import java.util.Random;
 import interfacce.Disegnabile;
 import interfacce.Energetico;
 
-public class Ostacolo implements Disegnabile, Energetico{
+public class Ostacolo implements Disegnabile, Energetico, Serializable{
 
 
 	private int energia;

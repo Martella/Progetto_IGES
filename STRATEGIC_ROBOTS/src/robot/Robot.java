@@ -10,7 +10,7 @@ import eccezioni.InsufficientEnergyException;
 import interfacce.Disegnabile;
 import interfacce.Energetico;
 
-public class Robot implements Disegnabile, Energetico, Cloneable{
+public class Robot implements Disegnabile, Energetico, Cloneable, Serializable{
 
 	private int x;
 	private int y;

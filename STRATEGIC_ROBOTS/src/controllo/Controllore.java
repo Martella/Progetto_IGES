@@ -1,4 +1,5 @@
 package controllo;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,7 +13,7 @@ import robot.Robot;
 import robot.RobotCombattente;
 import robot.RobotLavoratore;
 
-abstract class Controllore{
+abstract class Controllore implements Serializable{
 	
 	private ArrayList<RobotCombattente> robotCombattenteArray;
 	private ArrayList<RobotLavoratore> robotLavoratoreArray;
@@ -232,5 +233,12 @@ abstract class Controllore{
 		return insiemeRobotLavoratoreArray;
 	}
 	
+	/**
+	 * Il controllore controlla i Robot della partita salvata
+	 */
+	public void aggiornaRobot(){
+		insiemeRobotCombattenteArray = insiemeRobotCombattenteArray2;
+		insiemeRobotLavoratoreArray = insiemeRobotLavoratoreArray2;
+	}
 
 }

@@ -2,8 +2,9 @@ package elementiScenario;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.Serializable;
 
-public class BarraEnergia {
+public class BarraEnergia implements Serializable {
 
 	private int energia;
 	private int maxEnergia;

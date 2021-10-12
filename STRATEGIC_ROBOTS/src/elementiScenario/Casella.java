@@ -4,13 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.Serializable;
 
 import javax.swing.JComponent;
 
 import interfacce.Disegnabile;
 import interfacce.Energetico;
 
-public class Casella extends JComponent {
+public class Casella extends JComponent implements Serializable{
 
 	private Disegnabile oggetto;
 	private Energetico oggettoEnergetico;

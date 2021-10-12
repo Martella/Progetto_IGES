@@ -1,9 +1,11 @@
-package generale;
+package remote;
+
+import java.io.Serializable;
 
 import controllo.ControlloreInterattivo;
 import elementiScenario.Scenario;
 
-public class DatiPartita {
+public class DatiPartita implements Serializable{
 
 	private String modalit‡Partita;
 	private Scenario scenario;

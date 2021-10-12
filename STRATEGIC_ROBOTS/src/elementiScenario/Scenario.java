@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,7 +13,7 @@ import javax.swing.JPanel;
 import interfacce.Disegnabile;
 import interfacce.Energetico;
 
-public class Scenario extends JPanel{
+public class Scenario extends JPanel implements Serializable{
 	
 	private final int RIGHE = 5;
 	private final int COLONNE = 10;
