@@ -214,29 +214,5 @@ public class GameManager {
 	}
 	
 	
-	public void caricaStatoPartita(DatiPartita stato) {
-		
-		DatiPartita datiPartita = stato;
-		
-		modalit‡Partita = datiPartita.getModalit‡Partita();
-		scenario = datiPartita.getScenario();
-		controlloreGiocatore1 = datiPartita.getControlloreInterattivo1();
-		controlloreGiocatore2 = datiPartita.getControlloreInterattivo2();
-		numeroMossa = datiPartita.getNumeroMossa();
-		
-		controlloreGiocatore1.modificaFrame(frame);
-		controlloreGiocatore1.aggiornaRobot();
-		
-		controlloreGiocatore2.modificaFrame(frame);
-		controlloreGiocatore2.aggiornaRobot();
-		
-		frame.add(scenario);
-		frame.setVisible(true);
-		
-		KeyListener listenerCambioGiocatore = new CambioGiocatore();
-		frame.addKeyListener(listenerCambioGiocatore);
-	}
-
-	
 
 }

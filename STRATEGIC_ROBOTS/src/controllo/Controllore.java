@@ -234,11 +234,12 @@ public class Controllore implements Serializable{
 	}
 	
 	/**
-	 * Il controllore controlla i Robot della partita salvata
+	 * Il controllore controlla i Robot dello stato salvato
 	 */
 	public void aggiornaRobot(){
 		insiemeRobotCombattenteArray = insiemeRobotCombattenteArray2;
 		insiemeRobotLavoratoreArray = insiemeRobotLavoratoreArray2;
 	}
+	
 
 }

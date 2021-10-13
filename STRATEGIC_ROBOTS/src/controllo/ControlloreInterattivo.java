@@ -662,5 +662,14 @@ public class ControlloreInterattivo extends Controllore implements Serializable 
 		if (robotDanneggiato75) throw new CriticalStatusException();	
 	}
 	
+	/**
+	 * Il controllore controlla i Robot dello stato salvato
+	 */
+	public void aggiungiKeyListner(){
+		
+		KeyListener muoviTastoListener = new InputTasti();
+		frame.addKeyListener(muoviTastoListener);
+	}
+	
 		
 }
