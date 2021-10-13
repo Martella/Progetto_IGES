@@ -1,36 +1,38 @@
-package controllo;
+package remote;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.server.ServerCloneException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Random;
 import java.util.Timer;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import controllo.ControlloreInterattivo;
+import controllo.ControlloreNonInterattivo;
+import controllo.TimerMossaComputer;
 import elementiScenario.Scenario;
 import frame.FineRoundFrame;
 import frame.ImpostazioniNuovaPartitaFrame;
 import frame.MessaggioFrame;
-import remote.DatiPartita;
+import robot.Robot;
 import robot.RobotCombattente;
 import robot.RobotLavoratore;
 
-/**
- * Questa classe crea una nuova partita */
-public class GameManager {
+
+public class Client2 extends UnicastRemoteObject implements ClientCallbackRemote{
 	
+
 	private String tipoScenario;
 	private String modalit‡Partita;
 	private JFrame frame;
@@ -41,10 +43,14 @@ public class GameManager {
 	private ControlloreInterattivo controlloreGiocatore2;
 	private ControlloreNonInterattivo controlloreComputer;
 	private int [] numeroMossa ;
-
-
-	public GameManager(){
-
+	
+	private static ServerCallbackRemote objCallback;
+	private static ServerGestioneStatoRemote objStato;
+	
+	private static DatiPartita datiPartitaServer;
+	
+	protected Client2() throws RemoteException {
+		super();
 		frame = new JFrame();
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		frame.setTitle("STRATEGIC ROBOTS");
@@ -52,17 +58,96 @@ public class GameManager {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		frame.setJMenuBar(creaMen˘Bar());
+	}
+
+	public static void main(String[] args) {
+
+		Logger log = Logger.getLogger("log");
+		
+		Client2 client = null;
+		objCallback = null;
+		objStato = null;
+		datiPartitaServer = null;
+		
+		try {
+			client = new Client2();
+			
+			log.info("Sto cercando l'ogetto remoto...");
+			Object obj = Naming.lookup("rmi://localhost/ServerRobot");
+
+			
+			objCallback = (ServerCallbackRemote) obj;
+			objStato = (ServerGestioneStatoRemote) obj;
+			
+			log.info("ogetto trovato");
+			
+
+			
+			objCallback.registerForCallBack(client);
+			
+			datiPartitaServer = objStato.getStatoServer();
+			//client.aggiornaDatiPartitaServer();
+			/*if (datiPartitaServer == null) {
+				client.startNuovaPartita("classic", "controGiocatore", 6);
+				
+				Robot r = new Robot();
+				r.modificaX(10);
+				objStato.aggiornaRobot(r);
+				//objStato.aggiornaStatoServer(client.getDatiPartitaServer());
+			}*/
+			//else System.out.println("non vuoto");
+			
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	@Override
+	public void aggiornaStatoClient(DatiPartita dp) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+		DatiPartita datiPartita = dp;
+		
+		modalit‡Partita = datiPartita.getModalit‡Partita();
+		scenario = datiPartita.getScenario();
+		controlloreGiocatore1 = datiPartita.getControlloreInterattivo1();
+		controlloreGiocatore2 = datiPartita.getControlloreInterattivo2();
+		numeroMossa = datiPartita.getNumeroMossa();
+		
+		controlloreGiocatore1.modificaFrame(frame);
+		controlloreGiocatore1.aggiornaRobot();
+		
+		controlloreGiocatore2.modificaFrame(frame);
+		controlloreGiocatore2.aggiornaRobot();
+		
+		frame.add(scenario);
+		frame.setVisible(true);
+		
+		KeyListener listenerCambioGiocatore = new CambioGiocatore();
+		frame.addKeyListener(listenerCambioGiocatore);
+
+	}
+
+	public void aggiornaDatiPartitaServer(){
+		datiPartitaServer= new DatiPartita();
+		
+		datiPartitaServer.modificaModalit‡Partita(modalit‡Partita);
+		datiPartitaServer.modificaNumeroMossa(numeroMossa);
+		datiPartitaServer.modificaScenario(scenario);
+		datiPartitaServer.modificaControlloreInterattivo1(controlloreGiocatore1);
+		datiPartitaServer.modificaControlloreInterattivo2(controlloreGiocatore2);
+		
+		MessaggioFrame infoFrame = new MessaggioFrame("dati inviati al server");
+		infoFrame.setVisible(true);
+		
+		//objCallback.aggiornaStatoServer(datiPartita);
 		
 	}
 	
-
-	/**
-	 * Crea una nuova partita in base ai parametri ricevuti.
-	 * Crea uno scenario e lo aggiunge al frame.
-	 * @param s rappresenta il tipo di scenario da creare
-	 * @param m rappresenta la modalit‡ della partita
-	 * @param n rappresenta il numero dei Robot per squadra
-	 */
 	public void startNuovaPartita(String s, String m, int n){
 		
 		tipoScenario = s;
@@ -112,11 +197,9 @@ public class GameManager {
 		
 		KeyListener listenerCambioGiocatore = new CambioGiocatore();
 		frame.addKeyListener(listenerCambioGiocatore);
-
+		
+		aggiornaDatiPartitaServer();
 	}
-	
-	
-	
 	
 	/**
 	 * Evento per passare il controllo ad un altro controllore premendo il tasto Invio
@@ -181,7 +264,9 @@ public class GameManager {
 		
 	}
 
-			
+
+
+	
 	private class clickNuovaPartita implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
@@ -191,8 +276,9 @@ public class GameManager {
 			nuovaPartita.setVisible(true);
 			frame.setVisible(false);
 		}
-					
+			
 	}
+	
 	
 	public JMenuBar creaMen˘Bar(){
 		
@@ -213,30 +299,9 @@ public class GameManager {
 		return men˘Bar;
 	}
 	
-	
-	public void caricaStatoPartita(DatiPartita stato) {
-		
-		DatiPartita datiPartita = stato;
-		
-		modalit‡Partita = datiPartita.getModalit‡Partita();
-		scenario = datiPartita.getScenario();
-		controlloreGiocatore1 = datiPartita.getControlloreInterattivo1();
-		controlloreGiocatore2 = datiPartita.getControlloreInterattivo2();
-		numeroMossa = datiPartita.getNumeroMossa();
-		
-		controlloreGiocatore1.modificaFrame(frame);
-		controlloreGiocatore1.aggiornaRobot();
-		
-		controlloreGiocatore2.modificaFrame(frame);
-		controlloreGiocatore2.aggiornaRobot();
-		
-		frame.add(scenario);
-		frame.setVisible(true);
-		
-		KeyListener listenerCambioGiocatore = new CambioGiocatore();
-		frame.addKeyListener(listenerCambioGiocatore);
+	public DatiPartita getDatiPartitaServer() {
+		return datiPartitaServer;
 	}
 
-	
 
 }

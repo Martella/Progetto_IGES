@@ -3,6 +3,7 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -14,7 +15,7 @@ import elementiScenario.BancoRifornimenti;
 import elementiScenario.Scenario;
 import robot.Robot;
 
-public class BancoRifornimentiFrame extends JFrame{
+public class BancoRifornimentiFrame extends JFrame {
 
 	final int FRAME_WIDTH = 500;
 	final int FRAME_HEIGHT = 300;

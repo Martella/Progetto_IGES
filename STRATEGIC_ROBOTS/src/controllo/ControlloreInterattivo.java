@@ -1,6 +1,7 @@
 package controllo;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
@@ -17,7 +18,9 @@ import robot.Robot;
 import robot.RobotCombattente;
 import robot.RobotLavoratore;
 
-public class ControlloreInterattivo extends Controllore {
+public class ControlloreInterattivo extends Controllore implements Serializable {
+	
+	private static final long serialVersionUID = 6529685098267757690L;
 	
 	private Scenario scenario;
 	private String [][] griglia;

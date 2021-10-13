@@ -13,7 +13,7 @@ import robot.Robot;
 import robot.RobotCombattente;
 import robot.RobotLavoratore;
 
-abstract class Controllore implements Serializable{
+public class Controllore implements Serializable{
 	
 	private ArrayList<RobotCombattente> robotCombattenteArray;
 	private ArrayList<RobotLavoratore> robotLavoratoreArray;
