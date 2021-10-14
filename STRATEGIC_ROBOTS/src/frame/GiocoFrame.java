@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import remote.ClientGameManager;
+
 
 /**
  * Questa classe genera un frame che da la possibilità all'utente di:
@@ -31,13 +33,15 @@ public class GiocoFrame extends JFrame{
 	
 	public void creaPanelPrincipale(){
 		JPanel panelPrincipale = new JPanel();
-		panelPrincipale.setLayout(new GridLayout(5, 1));
+		panelPrincipale.setLayout(new GridLayout(6, 1));
 		JPanel titolo = titoloPanel();
 		JPanel nuovaPartita = nuovaPartitaPanel();
 		JPanel regole = regolePanel();
 		JPanel esci = esciPanel();
 		JPanel realizzatore = realizzatorePanel();
+		JPanel giocaOnline = giocaOnlinePanel();
 		panelPrincipale.add(titolo);
+		panelPrincipale.add(giocaOnline);
 		panelPrincipale.add(nuovaPartita);
 		panelPrincipale.add(regole);
 		panelPrincipale.add(esci);
@@ -128,6 +132,30 @@ public class GiocoFrame extends JFrame{
 		panel.add(label);
 		return panel;
 	}
+	
+	public JPanel giocaOnlinePanel(){
+		JPanel panel = new JPanel();
+		JButton button = new JButton("Gioca Online");
+		button.setPreferredSize(new Dimension(200,100));
+		panel.add(button);
+		
+		class clickButton implements ActionListener{
+
+			public void actionPerformed(ActionEvent e) {
+				
+				GiocoFrame.this.dispose();
+				
+				ClientGameManager.start();
+				
+			}
+			
+		}
+		
+		ActionListener listener = new clickButton();
+		button.addActionListener(listener);
+		
+		return panel;
+	} 
 
 	
 }
