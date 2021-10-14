@@ -51,6 +51,7 @@ public class MainTestClient extends UnicastRemoteObject implements ClientCallbac
 	
 	private int controlloreAssegnato;
 	private Boolean flagMossa;
+	private static MainTestClient client;
 	
 	protected MainTestClient() throws RemoteException {
 		super();
@@ -64,7 +65,7 @@ public class MainTestClient extends UnicastRemoteObject implements ClientCallbac
 
 		log = Logger.getLogger("log");
 		
-		MainTestClient client = null;
+		client = null;
 		objCallback = null;
 		objStato = null;
 		datiPartitaServer = null;
@@ -85,20 +86,6 @@ public class MainTestClient extends UnicastRemoteObject implements ClientCallbac
 			
 			objCallback.registerForCallBack(client);
 			
-			//datiPartitaServer = objStato.getStatoServer();
-			
-			//client.aggiornaDatiPartitaServer();
-			/*if (datiPartitaServer == null) {
-				client.startNuovaPartita("classic", "controGiocatore", 6);
-				
-				Robot r = new Robot();
-				r.modificaX(10);
-				objStato.aggiornaRobot(r);
-				//objStato.aggiornaStatoServer(client.getDatiPartitaServer());
-			}*/
-			//else System.out.println("non vuoto");
-			
-
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -137,8 +124,10 @@ public class MainTestClient extends UnicastRemoteObject implements ClientCallbac
 		controlloreGiocatore2.modificaFrame(frame);
 		controlloreGiocatore2.aggiornaRobot();
 		
-		System.out.println("controllore assegnato = " + controlloreAssegnato);
+		//System.out.println("controllore assegnato = " + controlloreAssegnato);
 		
+		System.out.println("dimensione array controllore1: " + controlloreGiocatore1.getRobotCombattenteArray().size());
+		System.out.println("dimensione array controllore2: " + controlloreGiocatore2.getRobotCombattenteArray().size());
 
 		flagMossa = false;
 		if (controlloreAssegnato == 1) {
@@ -153,26 +142,15 @@ public class MainTestClient extends UnicastRemoteObject implements ClientCallbac
 			}
 		}
 		
+		if (!finePartita()) {
+			frame.add(scenario);
+			frame.setVisible(true);
+			
+			KeyListener listenerCambioGiocatore = new CambioGiocatore();
+			frame.addKeyListener(listenerCambioGiocatore);
+		}
+		
 
-		System.out.println("flag mossa = " + flagMossa);
-		
-		/*
-		if(controlloreAssegnato == 1) {
-			controlloreGiocatore1.start(scenario.getArrayListOstacoli(), scenario.getArrayListBancoRifornimenti());
-		} else if (controlloreAssegnato == 2) {
-			controlloreGiocatore2.start(scenario.getArrayListOstacoli(), scenario.getArrayListBancoRifornimenti());
-		} else log.info("problema con il controllore assegnato");
-		*/
-		
-		//scenario.repaintScenario();
-
-		//scenario.repaintScenario();
-		frame.add(scenario);
-		frame.setVisible(true);
-		//scenario.repaintScenario();
-		
-		KeyListener listenerCambioGiocatore = new CambioGiocatore();
-		frame.addKeyListener(listenerCambioGiocatore);
 
 	}
 
@@ -265,14 +243,34 @@ public class MainTestClient extends UnicastRemoteObject implements ClientCallbac
 	private class clickAbbandona implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
+
+			// la partita termina quando un controllore non ha più robot combattennti a disposizione. 
+			//Di conseguenza li elimino per terminare la partita
+			if (controlloreAssegnato == 1) {
+				int i = controlloreGiocatore1.getRobotCombattenteArray().size();
+				while (i > 0) {
+					controlloreGiocatore1.getRobotCombattenteArray().remove(i-1);
+					i--;
+				}
+				
+			} else if (controlloreAssegnato == 2) {
+				int i = controlloreGiocatore2.getRobotCombattenteArray().size();
+				while (i > 0) {
+					controlloreGiocatore2.getRobotCombattenteArray().remove(i-1);
+					i--;
+				}
+			}
+			frame.dispose();
 			
-			// da implementare
-			/*
-			ImpostazioniNuovaPartitaFrame nuovaPartita = new ImpostazioniNuovaPartitaFrame();
-			nuovaPartita.setLocationRelativeTo(null);
-			nuovaPartita.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			nuovaPartita.setVisible(true);
-			frame.setVisible(false);*/
+			
+			
+			try {
+				aggiornaDatiPartitaServer();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			
 		}
 			
@@ -316,5 +314,37 @@ public class MainTestClient extends UnicastRemoteObject implements ClientCallbac
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		frame.setJMenuBar(creaMenùBar());
+	}
+	
+	public Boolean finePartita() throws RemoteException {
+		
+		Boolean fineBool = false;
+		
+		if (controlloreAssegnato == 1) {
+			if (controlloreGiocatore1.getRobotCombattenteArray().size() == 0) {
+				fineBool = true;
+				MessaggioFrame messaggio = new MessaggioFrame("HAI PERSO\nNon hai più robot combattenti a disposizione", 900, 110);
+				messaggio.setVisible(true);
+				objCallback.unregisterCallBack(client);
+			} else if (controlloreGiocatore2.getRobotCombattenteArray().size() == 0) {
+				fineBool = true;
+				MessaggioFrame messaggio = new MessaggioFrame("HAI VINTO\n L'avversario non hai più robot combattenti a disposizione oppure ha abbandonato la partita" , 900, 110);
+				messaggio.setVisible(true);
+				objCallback.unregisterCallBack(client);
+			}
+		} else if (controlloreAssegnato == 2) {
+			if (controlloreGiocatore2.getRobotCombattenteArray().size() == 0) {
+				fineBool = true;
+				MessaggioFrame messaggio = new MessaggioFrame("HAI PERSO\nNon hai più robot combattenti a disposizione", 900, 110);
+				messaggio.setVisible(true);
+				objCallback.unregisterCallBack(client);
+			} else if (controlloreGiocatore1.getRobotCombattenteArray().size() == 0) {
+				fineBool = true;
+				MessaggioFrame messaggio = new MessaggioFrame("HAI VINTO\n L'avversario non hai più robot combattenti a disposizione oppure ha abbandonato la partita", 900, 110);
+				messaggio.setVisible(true);
+				objCallback.unregisterCallBack(client);
+			}
+		}
+		return fineBool;
 	}
 }

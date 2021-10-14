@@ -10,6 +10,4 @@ import robot.Robot;
 
 public interface ServerGestioneStatoRemote extends Remote {
 	public void aggiornaStatoServer(DatiPartita dp) throws RemoteException;
-	public DatiPartita getStatoServer() throws RemoteException;
-	public void aggiornaRobot(Robot r) throws RemoteException;
 }

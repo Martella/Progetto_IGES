@@ -31,6 +31,23 @@ public class MessaggioFrame extends JFrame {
 		add(panel);
 	}
 	
+	public MessaggioFrame(String m, int larghezza, int altezza){
+
+		String mex = m;
+		setSize(larghezza, altezza);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		
+		Panel panel = new Panel();
+		Label label = new Label(mex);
+		
+		panel.add(label);
+		panel.add(creaButton());
+		
+		add(panel);
+	}
+	
 	public JButton creaButton(){
 		
 		JButton button = new JButton("Ok");
