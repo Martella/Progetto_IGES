@@ -79,6 +79,7 @@ public class Controllore implements Serializable{
 		boolean trovato = false;
 		int indice;
 		
+		aggiornaArrayRobotCombattenti();
 		if(robotCombattenteArray.size() == 0){
 			MessaggioFrame messaggio = new MessaggioFrame("Partita terminata");
 			messaggio.setVisible(true);
@@ -241,5 +242,27 @@ public class Controllore implements Serializable{
 		insiemeRobotLavoratoreArray = insiemeRobotLavoratoreArray2;
 	}
 	
+	public void aggiornaArrayRobotCombattenti() {
+		
+		for (int i = 0; i < robotCombattenteArray.size(); i++) {
+			Boolean trovato = false;
+			for(int j = 0; j < insiemeRobotCombattenteArray.size(); j++) {
+				if( (robotCombattenteArray.get(i)).getX() == (insiemeRobotCombattenteArray.get(j)).getX() && (robotCombattenteArray.get(i)).getY() == (insiemeRobotCombattenteArray.get(j)).getY()){
+					trovato = true;
+				}
+			}
+			if(!trovato) robotCombattenteArray.remove(i);
+		}
+		
+		/*for(int j = 0; j < insiemeRobotCombattenteArray.size(); j++){
+			if( (robotCombattenteArray.get(indice)).getX() == (insiemeRobotCombattenteArray.get(j)).getX() && (robotCombattenteArray.get(indice)).getY() == (insiemeRobotCombattenteArray.get(j)).getY()){
+				robScelto = robotCombattenteArray.get(indice);
+				trovato = true;
+			}
+		}
+		
+		if(!trovato) robotCombattenteArray.remove(indice);*/
+	
+	}
 
 }
