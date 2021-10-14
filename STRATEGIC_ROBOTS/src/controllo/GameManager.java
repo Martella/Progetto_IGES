@@ -129,8 +129,10 @@ public class GameManager {
 				
 				numeroMossa[0]++;
 				
+				
 				//ogni 2 mosse finisce il round e viene scelto casualmente il controllore che inizia l'altro round
-				if(numeroMossa[0] % 2 == 0){
+				// decommentare per inserire i round
+				/*if(numeroMossa[0] % 2 == 0){
 					FineRoundFrame fine = new FineRoundFrame(numeroMossa[0] / 2);
 					fine.setVisible(true);
 
@@ -149,7 +151,7 @@ public class GameManager {
 						controlloreGiocatore1.disattiva();
 					}
 				}
-				
+				*/
 				if(controlloreGiocatore1.getStato()){
 					controlloreGiocatore1.disattiva();
 					if (modalitàPartita.equals("controGiocatore")){
@@ -200,8 +202,10 @@ public class GameManager {
 		
 		JMenu menùFile = new JMenu("Opzioni");
 		
+		JMenuItem menùSalva = new JMenuItem("Salva Partita");
 		JMenuItem menùNuova = new JMenuItem("Nuova Partita");
 		
+		menùFile.add(menùSalva);
 		menùFile.add(menùNuova);
 		
 		menùBar.add(menùFile);
@@ -209,10 +213,93 @@ public class GameManager {
 		ActionListener listenerNuovaPartita = new clickNuovaPartita();		
 		menùNuova.addActionListener(listenerNuovaPartita);
 		
+		ActionListener listenerSalvaPartita = new clickSalvaPartita();		
+		menùSalva.addActionListener(listenerSalvaPartita);
 		
 		return menùBar;
 	}
 	
+	/**
+	 * Evento che salva un oggetto DatiPartita contenente i dati della partita in un file. 
+	 */
+	private class clickSalvaPartita implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			DatiPartita datiPartitaSalvata = new DatiPartita();
+			
+			datiPartitaSalvata.modificaModalitàPartita(modalitàPartita);
+			datiPartitaSalvata.modificaNumeroMossa(numeroMossa);
+			datiPartitaSalvata.modificaScenario(scenario);
+			datiPartitaSalvata.modificaControlloreInterattivo1(controlloreGiocatore1);
+			datiPartitaSalvata.modificaControlloreInterattivo2(controlloreGiocatore2);
+
+
+			String mex = new String("Partita salvata");
+			
+			try {
+				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("salvataggio\\partitaSalvata.dat"));
+				out.writeObject(datiPartitaSalvata);			
+				out.close();
+				
+			} catch (FileNotFoundException e1) {
+				mex = "Errore nel salvataggio";
+				e1.printStackTrace();
+			} catch (IOException e2) {
+				mex = "Errore nel salvataggio";
+				e2.printStackTrace();
+			}
+			
+			MessaggioFrame salvataggioframe = new MessaggioFrame(mex);
+			salvataggioframe.setVisible(true);
+
+
+		}
+					
+	}
+	
+	/**
+	 * Carica una partita salvata.
+	 * @throws FileNotFoundException se avviene qualche errore nel caricamento dell'oggetto DatiPartitaSalvata
+	 * @throws IOException se avviene qualche errore nel caricamento dell'oggetto DatiPartitaSalvata
+	 * @throws ClassNotFoundException se avviene qualche errore nel caricamento dell'oggetto DatiPartitaSalvata
+	 */
+	public void startPartitaSalvata() throws FileNotFoundException, IOException, ClassNotFoundException{
+		File file = new File("salvataggio\\partitaSalvata.dat");
+
+		if (file.exists()){
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+			DatiPartita datiPartitaSalvata = (DatiPartita) in.readObject();
+			in.close();
+			
+			modalitàPartita = datiPartitaSalvata.getModalitàPartita();
+			scenario = datiPartitaSalvata.getScenario();
+			controlloreGiocatore1 = datiPartitaSalvata.getControlloreInterattivo1();
+			controlloreGiocatore2 = datiPartitaSalvata.getControlloreInterattivo2();
+			numeroMossa = datiPartitaSalvata.getNumeroMossa();
+			
+			controlloreGiocatore1.aggiornaRobot();
+			controlloreGiocatore1.modificaFrame(frame);
+			
+			controlloreGiocatore2.aggiornaRobot();
+			controlloreGiocatore2.modificaFrame(frame);
+
+			controlloreGiocatore1.aggiungiKeyListner();
+			controlloreGiocatore2.aggiungiKeyListner();
+			
+
+
+
+			frame.add(scenario);
+			frame.setVisible(true);
+			
+			KeyListener listenerCambioGiocatore = new CambioGiocatore();
+			frame.addKeyListener(listenerCambioGiocatore);
+		} else {
+			MessaggioFrame messaggio = new MessaggioFrame("Nessuna partita trovata!", 170, 100);
+			messaggio.setVisible(true);
+		}
+		
+	}
 	
 
 }

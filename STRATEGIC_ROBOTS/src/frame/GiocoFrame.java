@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controllo.GameManager;
 import remote.ClientGameManager;
 
 
@@ -22,7 +23,7 @@ import remote.ClientGameManager;
 public class GiocoFrame extends JFrame{
 
 	private final int FRAME_WIDTH = 500;
-	private final int FRAME_HEIGHT = 500;
+	private final int FRAME_HEIGHT = 700;
 
 	public GiocoFrame(){
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -33,16 +34,18 @@ public class GiocoFrame extends JFrame{
 	
 	public void creaPanelPrincipale(){
 		JPanel panelPrincipale = new JPanel();
-		panelPrincipale.setLayout(new GridLayout(6, 1));
+		panelPrincipale.setLayout(new GridLayout(7, 1));
 		JPanel titolo = titoloPanel();
 		JPanel nuovaPartita = nuovaPartitaPanel();
 		JPanel regole = regolePanel();
 		JPanel esci = esciPanel();
 		JPanel realizzatore = realizzatorePanel();
 		JPanel giocaOnline = giocaOnlinePanel();
+		JPanel carica = caricaPartitaPanel();
 		panelPrincipale.add(titolo);
 		panelPrincipale.add(giocaOnline);
 		panelPrincipale.add(nuovaPartita);
+		panelPrincipale.add(carica);
 		panelPrincipale.add(regole);
 		panelPrincipale.add(esci);
 		panelPrincipale.add(realizzatore);
@@ -60,7 +63,7 @@ public class GiocoFrame extends JFrame{
 	
 	public JPanel nuovaPartitaPanel(){
 		JPanel panel = new JPanel();
-		JButton button = new JButton("Nuova Partita");
+		JButton button = new JButton("Gioca in locale");
 		button.setPreferredSize(new Dimension(200,100));
 		panel.add(button);
 		
@@ -156,6 +159,34 @@ public class GiocoFrame extends JFrame{
 		
 		return panel;
 	} 
+	
+	public JPanel caricaPartitaPanel(){
+		JPanel panel = new JPanel();
+		JButton button = new JButton("Carica Partita");
+		button.setPreferredSize(new Dimension(200,100));
+		panel.add(button);
+		
+		class clickButton implements ActionListener{
+
+			public void actionPerformed(ActionEvent e) {
+				
+				GiocoFrame.this.dispose();
+				GameManager manager = new GameManager();
+
+				try {
+					manager.startPartitaSalvata();
+				} catch (ClassNotFoundException | IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+		}
+		
+		ActionListener listener = new clickButton();
+		button.addActionListener(listener);
+		
+		return panel;
+	}
 
 	
 }
