@@ -35,18 +35,26 @@ public class RegoleGiocoFrame extends JFrame{
 	public JTextArea creaJTexArea(){
 		JTextArea area = new JTextArea();
 		
-		area.append("\n-Il gioco avviene per round.\n\n-In ogni round, ciascun robot esegue una sola mossa in base alla scelta del suo \n controllore.\n\n"
-				+ "-Una mossa di un robot può consistere in un’azione effettiva oppure nella decisione di\n non compiere alcuna azione.\n\n-Premendo il tasto "
-				+ "INVIO si passa la mossa all’avversario.\n\n-L’ordine di esecuzione in ogni round è stabilito in maniera casuale assumendo \nequi-probabilità.\n\n"
-				+ "-Un robot ha una riserva di energia e può compiere una serie di azioni tra cui spostarsi.\n Per spostarsi o compiere un’altra azione un robot consuma "
-				+ "energia, ciò avviene\n premendo i tasti direzionali.\n\n-Ogni azione richiede un"
-				+ "quantitativo di energia fissato.\n Se l’energia residua non è sufficiente per compiere"
-				+ "un’azione, allora questa non potrà\n essere eseguita.\n\n-Esistono due tipologie di robot: lavoratori e combattenti.\n\n1. Lavoratori. Possono ricaricare l'energia degli altri robot;\n"
-				+ "Combattenti. Possono combattere con altri robot e distruggere ostacoli;\n"
-				+ "\n-Un ostacolo ha un valore di resistenza (bisogna superare questo valore per demolirlo)\n "
-				+ "\n\n-Un banco rifornimento ha una riserva di energia (per le ricariche); Il banco di rifornimento è indistruttibile e non può essere spostato.\n"
-				+ " Per interagire col banco rifornimenti bisogna recarsi vicino con un robot e premere la\n barra spaziatrice."
-				+ "\n\n-Perde la squadra che non più Robot Combattenti a disposizione.\n\n");
+		area.append("Sostanzialmente il gioco è caratterizzato da uno scenario in cui sono presenti degli ostacoli, un banco rifornimenti e 2 tipologie di robot che interagiscono tra di loro. \r\n" + 
+				"Dopo aver scelto le varie impostazioni della partita, l’utente può iniziare a giocare contro un altro utente sullo stesso computer alternando l’invio delle mosse da compiere.\r\n" + 
+				"Ogni utente può controllare una squadra di robot composta da robot combattenti (riconoscibili graficamente da una spada) e robot lavoratori (riconoscibili graficamente da una chiave inglese).\r\n" + 
+				"I robot combattenti possono spostarsi all’interno dello scenario e possono attaccare ostacoli (spostandosi nella loro casella) o altri robot facendo diminuire la loro energia. \r\n" + 
+				"I robot lavoratori possono spostarsi all’interno dello scenario, possono spostare ostacoli (spostandosi nella loro casella) e possono curare altri robot facendo aumentare la loro energia.\r\n" + 
+				"Ogni azione richiede un quantitativo di energia fissato. Se l’energia residua non è sufficiente per compiere un’azione, allora questa non potrà essere eseguita.\r\n" + 
+				"Entrambi i robot possono ricaricare la propria energia tramite il banco rifornimenti presente nello scenario.\r\n" + 
+				"Il banco rifornimento è indistruttibile, non può essere spostato e ha una riserva di energia per le ricariche. Per interagire col banco rifornimenti bisogna recarsi vicino con un robot e premere la barra spaziatrice.\r\n" + 
+				"\r\n" + 
+				"Il gioco è organizzato in round. In ogni round viene scelto casualmente un robot che può essere controllato dall’utente. Il robot controllato è evidenziato.\r\n" + 
+				"Ogni utente può effettuare una sola mossa durante il round, dopodiché passa il controllo all’avversario.\r\n" + 
+				"La mossa termina quando l’utente preme il tasto invio.\r\n" + 
+				"Quando il giocatore esegue una delle seguenti azioni non può continuare ad eseguire altre operazioni, di conseguenza è costretto a premere invio per passare il controllo all’altro giocatore:\r\n" + 
+				"•	L’utente attacca un robot attraverso il robot combattente controllato.\r\n" + 
+				"•	L’utente attacca un ostacolo attraverso il robot combattente controllato.\r\n" + 
+				"•	L’utente cura un robot attraverso un robot lavoratore controllato.\r\n" + 
+				"•	L’utente ricarica l’energia di un robot controllato tramite il banco dei rifornimenti \r\n" + 
+				"\r\n" + 
+				"I robot e gli ostacoli che non hanno più energia dopo aver subito un attacco vengono distrutti. La partita termina quando uno dei due giocatori non ha più robot combattenti a disposizione. \r\n" + 
+				"");
 	
 		area.setEditable(false);
 

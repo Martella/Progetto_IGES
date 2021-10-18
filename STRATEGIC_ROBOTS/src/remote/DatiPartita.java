@@ -13,7 +13,15 @@ public class DatiPartita implements Serializable{
 	private ControlloreInterattivo controlloreInterattivo1;
 	private ControlloreInterattivo controlloreInterattivo2;
 	
-	public DatiPartita() {};
+	public DatiPartita() {
+		modalit‡Partita = null;
+		scenario = null;
+		numeroMossa = null;
+		controlloreInterattivo1 = null;
+		controlloreInterattivo2 = null;
+	}
+
+	;
 	
 	public void modificaModalit‡Partita(String m){
 		modalit‡Partita = m;

@@ -46,7 +46,7 @@ public class ITC_ControlloreInterattivo {
 	}
 	
 	@Test
-	public void testgetRobotLavoratoreeArray() {
+	public void testGetRobotLavoratoreeArray() {
 		ArrayList<RobotLavoratore> robotLavoratoreArray = controllore.getRobotLavoratoreeArray();
 		if (robotLavoratoreArray != null) assertEquals(true, true);
 		else assertEquals(true, false);
@@ -61,7 +61,7 @@ public class ITC_ControlloreInterattivo {
 	}
 	
 	@Test
-	public void testgetInsiemeRobotLavoratoreeArray() {
+	public void testGetInsiemeRobotLavoratoreeArray() {
 		ArrayList<RobotLavoratore> robotLavoratoreArray = controllore.getRobotLavoratoreeArray();
 		if (robotLavoratoreArray != null) assertEquals(true, true);
 		else assertEquals(true, false);
