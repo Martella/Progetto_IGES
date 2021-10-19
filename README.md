@@ -1,4 +1,4 @@
-In questa repository è presente l'architettura Client per la modalità "Gioca Online"
+Per la modalità "Gioca Online", in questa repository è presente solo l'architettura Client.
 
 L'architettura server è presente nella seguente repository:
 https://github.com/Martella/Progetto_IGES_Server
