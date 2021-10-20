@@ -250,8 +250,8 @@ public class ClientGameManager extends UnicastRemoteObject implements ClientCall
 					i--;
 				}
 			}
-			frame.dispose();
-			
+			//frame.dispose();
+			frame.setVisible(false);
 			
 			
 			try {
@@ -336,6 +336,13 @@ public class ClientGameManager extends UnicastRemoteObject implements ClientCall
 			}
 		}
 		return fineBool;
+	}
+
+	@Override
+	public void comunicaServerOccupato() throws RemoteException {
+		MessaggioFrame messaggio = new MessaggioFrame("Server occupato!", 200,100);
+		messaggio.setVisible(true);
+		
 	}
 
 }
